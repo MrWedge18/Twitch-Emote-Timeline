@@ -1,0 +1,34 @@
+{
+    "name": "Twitch Emote Timeline",
+    "version": "1.0",
+    "description": "Emote Visualization for Twitch",
+    "permissions": [
+        "storage",
+        "tabs",
+        "webNavigation",
+        "*://www.twitch.tv/videos/*",
+        "*://twitchemotes.com/*"
+    ],
+    "background": {
+        "scripts": [
+            "js/bundle.js",
+            "js/twitch_api_client.js",
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "browser_action": {
+    },
+    "content_scripts": [
+    {
+        "matches" : ["*://www.twitch.tv/videos/*"],
+        "js": [
+            "content.js",
+            "lib/d3.v5.min.js"
+        ],
+        "css": ["css/style.css"],
+        "all_frames": true
+    }
+    ],
+    "manifest_version": 2
+  }
