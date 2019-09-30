@@ -11,7 +11,7 @@ const fetchVideoInfo = async (videoId) => {
 
 	const response = await fetch(`${twitch_api}videos/${videoId}?` + query);
 	const videoInfo = await response.json();
-	console.log("Video Info:", videoInfo);
+	//console.log("Video Info:", videoInfo);
 	return videoInfo;
 }
 
@@ -51,7 +51,7 @@ const fetchCommentsBlocks = async (videoId, cursor) => {
 		// console.log(commentsBlock);
 		cursor = commentsBlock["_next"];
 	}
-	console.log(video)
+	//console.log(video)
 	return video;
 }
 
@@ -116,7 +116,7 @@ const parseEmotes = async (fetcher, messages, channelName) => {
     };
 
     // Pretty-print the result
-    console.log(JSON.stringify(parsedComments, null, 2));
+    //console.log(JSON.stringify(parsedComments, null, 2));
     return parsedComments;
 }
 
@@ -179,6 +179,6 @@ const aggregateComments = ({comments, emotes}) => {
 	}
 
 	let aggregatedComments = { comments: timestamps, emotes }
-	console.log(JSON.stringify(aggregatedComments, null, 2));
+	//console.log(JSON.stringify(aggregatedComments, null, 2));
 	return aggregatedComments
 }

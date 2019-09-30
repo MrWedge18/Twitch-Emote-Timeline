@@ -3,7 +3,7 @@ var emote_data;
 var filters;
 
 function inject(){
-    console.log("injecting");
+    //console.log("injecting");
     
     var video_div = [undefined];
     while(video_div[0] == undefined)
@@ -93,8 +93,6 @@ function inject(){
     var filter_body = document.createElement("div");
     filter_body.className = "pane_body";
     filter_body.id = "filter_body";
-    
-    // TODO, CREATE BODY FOR FILTER
 
     video_div[0].appendChild(emote_root_div);
 
@@ -177,7 +175,7 @@ function createTimeline() {
     var d3_width = document.getElementById("d3").getBoundingClientRect().width;
     var d3_height = document.getElementById("d3").getBoundingClientRect().height;
     // Check your console. Should be some width and a height of probably 170 px. This is just debug code so remove it later
-    console.log(d3_width + ", " + d3_height);
+    //console.log(d3_width + ", " + d3_height);
         
     var margin = {top: 2, right: 0, bottom: 20, left: 20},
     width = d3_width - margin.left - margin.right,
@@ -568,7 +566,7 @@ function create_filters() {
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log("Message receieved");
+        //console.log("Message receieved");
         if (request.command == "inject") {
             inject();
         }
@@ -576,12 +574,12 @@ chrome.runtime.onMessage.addListener(
             remove("Emote_Only_Mode");
         }
         if(request.command == "injected?") {
-            console.log("injected?");
+            //console.log("injected?");
             if (document.getElementById("Emote_Only_Mode")) {
-                console.log("Yes");
+                //console.log("Yes");
                 sendResponse("Yes");
             } else {
-                console.log("No");
+                //console.log("No");
                 sendResponse("No");
             }
         }
@@ -589,7 +587,7 @@ chrome.runtime.onMessage.addListener(
             try {
                 comment_data = request.data.comments;
                 emote_data = request.data.emotes;
-                console.log(emote_data);
+                //console.log(emote_data);
                 injectFilters();
                 create_filters();
                 createTimeline();
