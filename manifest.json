@@ -1,7 +1,7 @@
 {
     "name": "Twitch Emote Timeline",
     "version": "1.0.0",
-    "description": "Emote Timeline Visualization for Twitch",
+    "description": "Emote Timeline for Twitch VODs",
     "permissions": [
         "storage",
         "tabs",
@@ -25,7 +25,7 @@
     },
     "content_scripts": [
     {
-        "matches" : ["*://www.twitch.tv/videos/*"],
+        "matches" : ["*://www.twitch.tv/*"],
         "js": [
             "js/content.js",
             "lib/d3.v5.min.js"
