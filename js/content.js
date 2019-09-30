@@ -36,21 +36,24 @@ function inject(){
     right_pane_div.className = "pane";
     right_pane_div.id = "pane_right";
 
-    var words_div = document.createElement("div");
-    words_div.id = "words";
+    var emotes_div = document.createElement("div");
+    emotes_div.id = "emotes";
 
     var right_header_div = document.createElement("div");
     right_header_div.className = "pane_header";
 
     var div = document.createElement("div");
 
-    var top_words_h1 = document.createElement("h1");
-    top_words_h1.className = "emote";
-    top_words_h1.innerHTML = "Top Words";
+    var top_emotes_h1 = document.createElement("h1");
+    top_emotes_h1.className = "emote";
+    top_emotes_h1.innerHTML = "Top Emotes";
 
     var last_10_sec_h3 = document.createElement("h3");
     last_10_sec_h3.className = "emote";
-    last_10_sec_h3.innerHTML = "Last 10 seconds";
+    last_10_sec_h3.id = "emote_list_timestamp"
+
+    var top_emotes_hint = document.createElement("text");
+    top_emotes_hint.innerHTML = "Click anywhere on the timeline to see top emotes."
 
     var filter_button = document.createElement("button");
     filter_button.className = "emote";
@@ -60,76 +63,11 @@ function inject(){
     button_span.className = "emote";
     button_span.innerHTML = "Emote Filters";
 
-    var words_list_body_div = document.createElement("div");
-    words_list_body_div.className = "pane_body";
+    var emotes_list_body_div = document.createElement("div");
+    emotes_list_body_div.className = "pane_body";
 
-    var words_list_div = document.createElement("div");
-    words_list_body_div.id = "words_list";
-
-    var word_entry1 = document.createElement("div");
-    word_entry1.className = "word_entry";
-    var word_div1 = document.createElement("div");
-    word_div1.innerHTML = "1. ";
-    var word_span1 = document.createElement("span");
-    word_span1.className = "emote";
-    word_span1.id = "word_1";
-    word_span1.innerHTML = "AYAYA";
-    var word_count_div1 = document.createElement("div");
-    word_count_div1.className = "word_count";
-    word_count_div1.id = "word_1_count";
-    word_count_div1.innerHTML = "128";
-
-    var word_entry2 = document.createElement("div");
-    word_entry2.className = "word_entry";
-    var word_div2 = document.createElement("div");
-    word_div2.innerHTML = "2. ";
-    var word_span2 = document.createElement("span");
-    word_span2.className = "emote";
-    word_span2.id = "word_2";
-    word_span2.innerHTML = "POGGERS";
-    var word_count_div2 = document.createElement("div");
-    word_count_div2.className = "word_count";
-    word_count_div2.id = "word_2_count";
-    word_count_div2.innerHTML = "92";
-
-    var word_entry3 = document.createElement("div");
-    word_entry3.className = "word_entry";
-    var word_div3 = document.createElement("div");
-    word_div3.innerHTML = "3. ";
-    var word_span3 = document.createElement("span");
-    word_span3.className = "emote";
-    word_span3.id = "word_3";
-    word_span3.innerHTML = "OMEGALUL";
-    var word_count_div3 = document.createElement("div");
-    word_count_div3.className = "word_count";
-    word_count_div3.id = "word_3_count";
-    word_count_div3.innerHTML = "76";
-
-    var word_entry4 = document.createElement("div");
-    word_entry4.className = "word_entry";
-    var word_div4 = document.createElement("div");
-    word_div4.innerHTML = "4. ";
-    var word_span4 = document.createElement("span");
-    word_span4.className = "emote";
-    word_span4.id = "word_4";
-    word_span4.innerHTML = "REEEE";
-    var word_count_div4 = document.createElement("div");
-    word_count_div4.className = "word_count";
-    word_count_div4.id = "word_4_count";
-    word_count_div4.innerHTML = "58";
-
-    var word_entry5 = document.createElement("div");
-    word_entry5.className = "word_entry";
-    var word_div5 = document.createElement("div");
-    word_div5.innerHTML = "5. ";
-    var word_span5 = document.createElement("span");
-    word_span5.className = "emote";
-    word_span5.id = "word_5";
-    word_span5.innerHTML = "FeelsBadMan";
-    var word_count_div5 = document.createElement("div");
-    word_count_div5.className = "word_count";
-    word_count_div5.id = "word_5_count";
-    word_count_div5.innerHTML = "43";
+    var emotes_list_div = document.createElement("div");
+    emotes_list_body_div.id = "emotes_list";
     
     var filter_div = document.createElement("div");
     filter_div.id = "filters";
@@ -140,17 +78,17 @@ function inject(){
     var filter_h1 = document.createElement("h1");
     filter_h1.className = "emote";
     filter_h1.innerHTML = "Emote Filters";
-    var filter_h3 = document.createElement("h3");
+    /*var filter_h3 = document.createElement("h3");
     filter_h3.className = "emote";
-    filter_h3.innerHTML = "Click to Select/Deselect";
+    filter_h3.innerHTML = "Click to Select/Deselect";*/
     
-    var words_button = document.createElement("button");
-    words_button.className = "emote";
-    words_button.id = "towords_button";
+    var emotes_button = document.createElement("button");
+    emotes_button.className = "emote";
+    emotes_button.id = "toemotes_button";
     
     var button_span2 = document.createElement("span");
     button_span2.className = "emote";
-    button_span2.innerHTML = "Top Words";
+    button_span2.innerHTML = "Top Emotes";
     
     var filter_body = document.createElement("div");
     filter_body.className = "pane_body";
@@ -171,70 +109,48 @@ function inject(){
     var spinner = document.createElement("div");
     spinner.className = "lds-ring-container";
     spinner.innerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>";
+    var spinner_text = document.createElement("div");
+    spinner_text.id = "error_msg";
+    spinner.appendChild(spinner_text);
     left_pane_div.appendChild(spinner);
 
-
-    right_pane_div.appendChild(words_div);
-    words_div.appendChild(right_header_div);
-    words_div.appendChild(words_list_body_div);
+    right_pane_div.appendChild(emotes_div);
+    emotes_div.appendChild(right_header_div);
+    emotes_div.appendChild(emotes_list_body_div);
 
     right_header_div.appendChild(div);
     right_header_div.appendChild(filter_button);
-    div.appendChild(top_words_h1);
+    div.appendChild(top_emotes_h1);
     div.appendChild(last_10_sec_h3);
     filter_button.appendChild(button_span);
 
-    words_list_body_div.appendChild(words_list_div);
-    words_list_div.appendChild(word_entry1);
-    words_list_div.appendChild(word_entry2);
-    words_list_div.appendChild(word_entry3);
-    words_list_div.appendChild(word_entry4);
-    words_list_div.appendChild(word_entry5);
-
-    word_entry1.appendChild(word_div1);
-    word_div1.appendChild(word_span1);
-    word_entry1.appendChild(word_count_div1);
-
-    word_entry2.appendChild(word_div2);
-    word_div2.appendChild(word_span2);
-    word_entry2.appendChild(word_count_div2);
-
-    word_entry3.appendChild(word_div3);
-    word_div3.appendChild(word_span3);
-    word_entry3.appendChild(word_count_div3);
-
-    word_entry4.appendChild(word_div4);
-    word_div4.appendChild(word_span4);
-    word_entry4.appendChild(word_count_div4);
-
-    word_entry5.appendChild(word_div5);
-    word_div5.appendChild(word_span5);
-    word_entry5.appendChild(word_count_div5);
+    emotes_list_body_div.appendChild(emotes_list_div);
+    emotes_list_div.appendChild(top_emotes_hint);
     
     right_pane_div.appendChild(filter_div);
     filter_div.appendChild(filter_header);
     
     filter_header.appendChild(filter_div2);
     filter_div2.appendChild(filter_h1);
-    filter_div2.appendChild(filter_h3);
-    filter_header.appendChild(words_button);
-    words_button.appendChild(button_span2);
+    //filter_div2.appendChild(filter_h3);
+    filter_header.appendChild(emotes_button);
+    emotes_button.appendChild(button_span2);
     
     filter_div.appendChild(filter_body);
     
     // Right pane view change code.
-    var words = document.getElementById("words");
+    var emotes = document.getElementById("emotes");
     var filters = document.getElementById("filters");
 
     var tofilters_button = document.getElementById("tofilters_button");
     tofilters_button.onclick = function() {
-        words.style.display = "none";
+        emotes.style.display = "none";
         filters.style.display = "flex";
     }
-    var towords_button = document.getElementById("towords_button");
-    towords_button.onclick = function() {
+    var toemotes_button = document.getElementById("toemotes_button");
+    toemotes_button.onclick = function() {
         filters.style.display = "none";
-        words.style.display = "flex";
+        emotes.style.display = "flex";
     }
 
 }
@@ -286,19 +202,6 @@ function createTimeline() {
     var xAxis = d3.axisBottom(x);
 
     var yAxis = d3.axisLeft(y);
-
-    function padLeft(num) {
-        return ("00"+num).slice(-2);
-    }
-        
-    function formatTime(d) {
-        var hours = Math.floor(d / 3600),
-        d = (d - (hours * 3600));
-        var minutes = Math.floor(d / 60);
-        var seconds = d - (minutes * 60);
-        var output = hours+':'+padLeft(minutes)+':'+padLeft(seconds);
-        return output;
-    }
         
     xAxis.tickFormat(formatTime);
         
@@ -340,58 +243,68 @@ function createTimeline() {
             .attr("transform", "translate(0 ,0)")
             .call(yAxis);
 
-    var focus = svg.append("g")
+    var circle = svg.append("g")
         .attr("class", "focus")
         .style("display", "none");
         
-    focus.append("circle")
+    circle.append("circle")
         .attr("r", 4.5);
 
+    var focus = svg.append("g")
+        .attr("class", "focus")
+        .style("display", "none");
+
     focus.append("image")
-        .attr("x", -45)
-        .attr("y", -30)
+        .attr("x", 0)
+        .attr("y", 0)
         .attr("id", "emote1")
         .attr("height", "25px")
         .attr("width", "25px");
         
     focus.append("text")
-        .attr("x", -15)
-        .attr("y", -15)
+        .attr("x", 30)
+        .attr("y", 20)
         .attr("fill", "currentColor")
         .attr("id", "emoteCount1");
 
     focus.append("image")
-        .attr("x", -5)
-        .attr("y", -30)
+        .attr("x", 0)
+        .attr("y", 30)
         .attr("id", "emote2")
         .attr("height", "25px")
         .attr("width", "25px");
         
     focus.append("text")
-        .attr("x", 25)
-        .attr("y", -15)
+        .attr("x", 30)
+        .attr("y", 50)
         .attr("fill", "currentColor")
         .attr("id", "emoteCount2");
 
     focus.append("image")
-        .attr("x", 35)
-        .attr("y", -30)
+        .attr("x", 0)
+        .attr("y", 60)
         .attr("id", "emote3")
         .attr("height", "25px")
         .attr("width", "25px");
         
     focus.append("text")
-        .attr("x", 65)
-        .attr("y", -15)
+        .attr("x", 30)
+        .attr("y", 80)
         .attr("fill", "currentColor")
         .attr("id", "emoteCount3");
+
+    focus.append("text")
+        .attr("x", 0)
+        .attr("y", 100)
+        .attr("fill", "currentColor")
+        .attr("id", "timestamp");
         
     svg.append("rect")
         .attr("class", "overlay")
         .attr("width", width)
         .attr("height", height)
-        .on("mouseover", function() { focus.style("display", null); })
-        .on("mouseout", function() { focus.style("display", "none") })
+        .on("mouseover", function() { circle.style("display", null); focus.style("display", null); })
+        .on("mouseout", function() { circle.style("display", "none"); focus.style("display", "none") })
         .on("mousemove", function() {
             var x0 = x.invert(d3.mouse(this)[0]);
             focus.select("text").text("");
@@ -434,16 +347,31 @@ function createTimeline() {
                     }
                 }
             }
-            //console.log(total);
-            focus.attr("transform", "translate(" + x(comment_data[index].content_offset_seconds) + "," + y(total) + ")");
-            focus.select("#emote1").attr("xlink:href", emotes[0]);
-            focus.select("#emoteCount1").text(emote_count[0]);
-            focus.select("#emote2").attr("xlink:href", emotes[1]);
-            focus.select("#emoteCount2").text(emote_count[1]);
-            focus.select("#emote3").attr("xlink:href", emotes[2]);
-            focus.select("#emoteCount3").text(emote_count[2]);
+            if (comment_data[index] != undefined) {
+                var xpos = x(comment_data[index].content_offset_seconds);
+                var ypos = y(total) - 100;
+
+                if (xpos < width - 50) {
+                    xpos = xpos + 15;
+                }
+                else {
+                    xpos = xpos - 50;
+                }
+                if (ypos < 0) {
+                    ypos = 0;
+                }
+                circle.attr("transform", "translate(" + x(comment_data[index].content_offset_seconds) + "," + y(total) + ")");
+                focus.attr("transform", "translate(" + xpos + "," + ypos+ ")");
+                focus.select("#emote1").attr("xlink:href", emotes[0]);
+                focus.select("#emoteCount1").text(emote_count[0]);
+                focus.select("#emote2").attr("xlink:href", emotes[1]);
+                focus.select("#emoteCount2").text(emote_count[1]);
+                focus.select("#emote3").attr("xlink:href", emotes[2]);
+                focus.select("#emoteCount3").text(emote_count[2]);
+                focus.select("#timestamp").text(formatTime(comment_data[index].content_offset_seconds));
+            }
         })
-        .on("click", function() {
+        .on("click", function() {            
             var x0 = x.invert(d3.mouse(this)[0]);
             var prev = 0,
                 curr = null,
@@ -460,9 +388,47 @@ function createTimeline() {
                 }
                 prev = curr;
             }
+
+            document.getElementById("emote_list_timestamp").innerHTML = formatTime(comment_data[index].content_offset_seconds);
+
+            var sorted_emotes = Object.keys(comment_data[index].emotes).map(function(key) {
+                return [key, comment_data[index].emotes[key]];
+            });
+            sorted_emotes.sort(function(first, second) {
+                return second[1] - first[1];
+            });
+
+            var emotes_list = document.getElementById("emotes_list");   
+            while(emotes_list.firstChild) {
+                emotes_list.removeChild(emotes_list.firstChild);
+            }
+            for (var i = 0; i < sorted_emotes.length; i++) {
+                var key = sorted_emotes[i][0];
+                var count = sorted_emotes[i][1];
+                var emote_url = emote_data[key].link;
+
+                var emote_entry = document.createElement("div");
+                emote_entry.className = "emote_entry";
+
+                var emote_rank = document.createElement("div");
+                emote_rank.innerHTML = (i+1) + ". ";
+
+                var emote_img = document.createElement("img");
+                emote_img.src = emote_url;
+                emote_img.alt = key;
+
+                var emote_count = document.createElement("div");
+                emote_count.className = "emote_count";
+                emote_count.innerHTML = count;
+
+                emotes_list.appendChild(emote_entry);
+                emote_entry.appendChild(emote_rank);
+                emote_rank.appendChild(emote_img);
+                emote_entry.appendChild(emote_count);
+            }
             // Old Code
             //embed.player.seek(comment_data[index].content_offset_seconds);
-            
+            /*
             var words = ["", "", "", "", ""];
             var word_count = [0, 0, 0, 0, 0];
             for (var i = 0; i < 5; i++) {
@@ -483,9 +449,23 @@ function createTimeline() {
             document.getElementById("word_2_count").innerHTML = word_count[1];
             document.getElementById("word_3_count").innerHTML = word_count[2];
             document.getElementById("word_4_count").innerHTML = word_count[3];
-            document.getElementById("word_5_count").innerHTML = word_count[4];
+            document.getElementById("word_5_count").innerHTML = word_count[4];*/
         });
     
+}
+        
+function formatTime(d) {
+
+    function padLeft(num) {
+        return ("00"+num).slice(-2);
+    }
+
+    var hours = Math.floor(d / 3600),
+    d = (d - (hours * 3600));
+    var minutes = Math.floor(d / 60);
+    var seconds = d - (minutes * 60);
+    var output = hours+':'+padLeft(minutes)+':'+padLeft(seconds);
+    return output;
 }
 
 function injectFilters() {
@@ -497,6 +477,7 @@ function injectFilters() {
     
     var select_all = document.createElement("button");
     select_all.className = "emote";
+    select_all.style.display = "inline-block";
     var all_span = document.createElement("span");
     all_span.innerHTML = "Select All";
     select_all.appendChild(all_span);
@@ -509,6 +490,7 @@ function injectFilters() {
 
     var select_none = document.createElement("button");
     select_none.className = "emote";
+    select_none.style.display = "inline-block";
     var none_span = document.createElement("span");
     none_span.innerHTML = "Select None";
     select_none.appendChild(none_span);
@@ -537,6 +519,7 @@ function injectFilters() {
         var img = document.createElement("img");
         img.id = key;
         img.src = emote_data[key].link;
+        img.style.padding_left = "5px";
         form.appendChild(img);
         
         count += 1;
@@ -603,13 +586,20 @@ chrome.runtime.onMessage.addListener(
             }
         }
         if (request.command == "loadComments") {
-            comment_data = request.data.comments;
-            emote_data = request.data.emotes;
-            console.log(emote_data);
-            injectFilters();
-            create_filters();
-            createTimeline();
-            let spinner = document.getElementsByClassName("lds-ring-container")[0];
-            spinner.style.display = "none";
+            try {
+                comment_data = request.data.comments;
+                emote_data = request.data.emotes;
+                console.log(emote_data);
+                injectFilters();
+                create_filters();
+                createTimeline();
+            }
+            catch {
+                document.getElementById("error_msg").innerHTML = "Error";
+            }
+            finally {
+                let spinner = document.getElementsByClassName("lds-ring")[0];
+                spinner.style.display = "none";
+            }
         }
 });

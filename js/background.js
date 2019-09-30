@@ -3,6 +3,7 @@ const fetcher = new Bundle.EmoteFetcher();
 let isInjected = {}; // tracks injected tabs
 
 chrome.browserAction.onClicked.addListener(function(tab) {
+    console.log("click");
     if (tab.url.indexOf("https://www.twitch.tv/videos/") !== -1) {
         // Asks content script whether the page is already injected
         chrome.tabs.sendMessage(tab.id, {command: "injected?"}, function(response) { 
@@ -25,7 +26,14 @@ chrome.browserAction.onClicked.addListener(function(tab) {
                     console.log("Message sent");
                 })();
             }
+            else {
+                chrome.tabs.sendMessage(tab.id, {command: "remove"});
+                isInjected[tab.id] = false;
+            }
         });
+    }
+    else {
+        alert("Not a Twitch VOD");
     }
 })
 
